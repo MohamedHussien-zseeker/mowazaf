@@ -1,0 +1,55 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+venv/
+env/
+
+# Distribution / packaging
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Docker
+*.pid
+
+# Databases (never commit SQLite prod/dev DBs — may contain tenant PII)
+*.db
+*.sqlite
+*.sqlite3
+memdb*
+
+# Local seed/test artifacts
+seed_tokens.out.json
+
+# Windows junk + tunnel logs
+nul
+cloudflared.log
+
+# SQLite journal files
+*.sqlite-journal
