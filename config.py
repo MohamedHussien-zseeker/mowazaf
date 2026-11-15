@@ -29,7 +29,7 @@ class Settings(BaseSettings):
     # We avoid pydantic complex decoding for test stability.
     CORS_ORIGINS: str = "http://localhost:3000"
 
-    DATABASE_URL: str = "postgresql+asyncpg://postgres:postgres@localhost:5432/mowazaf"
+    DATABASE_URL: str = "postgresql+asyncpg://mowazaf@localhost:5432/mowazaf"
     REDIS_URL: str = "redis://localhost:6379/0"
 
     # ── WhatsApp Cloud API (Meta) ────────────────────────────────────
