@@ -92,6 +92,9 @@ chmod +x setup.sh
 cp .env.example .env
 # Generate a unique MOWAZAF_SECRET and POSTGRES_PASSWORD; fill in .env.
 # Never commit the real .env file.
+# Existing PostgreSQL volumes: changing POSTGRES_PASSWORD in .env does NOT
+# rotate the password stored inside that database. Rotate the DB role password
+# to match before restarting the app; do not delete the volume to force re-init.
 
 # 3. Start services (PostgreSQL + Redis)
 docker compose up -d postgres redis
