@@ -88,21 +88,29 @@ mowazaf/
 chmod +x setup.sh
 ./setup.sh
 
-# 2. Configure
+# 2. Configure local environment
 cp .env.example .env
-# Edit .env — set MOWAZAF_SECRET, PostgreSQL URL, WhatsApp credentials
+# Generate a unique MOWAZAF_SECRET and POSTGRES_PASSWORD; fill in .env.
+# Never commit the real .env file.
 
 # 3. Start services (PostgreSQL + Redis)
 docker compose up -d postgres redis
 
-# 4. Apply schema + seed a test tenant
+# 4. Set a one-time demo admin password in your shell (do not reuse a real password)
+# PowerShell: $env:MOWAZAF_DEMO_ADMIN_PASSWORD = Read-Host "Demo admin password"
+# bash/zsh:   read -s MOWAZAF_DEMO_ADMIN_PASSWORD; export MOWAZAF_DEMO_ADMIN_PASSWORD
+
+# 5. Apply schema + seed a test tenant
 uv run --python .venv/Scripts/python.exe -c "
-import asyncio
+import asyncio, os
 from database import init_db, SessionLocal, TenantContext
 from models import Tenant, User
 from auth import hash_password
 
 async def seed():
+    password = os.environ['MOWAZAF_DEMO_ADMIN_PASSWORD']
+    if len(password) < 16:
+        raise ValueError('Use a unique demo password of at least 16 characters')
     await init_db()
     async with SessionLocal() as s:
         async with TenantContext('tenant_demo'):
@@ -112,7 +120,7 @@ async def seed():
             s.add(t)
             u = User(tenant_id='tenant_demo', username='admin',
                      full_name='Admin', role='admin',
-                     password_hash=hash_password('changeme'))
+                     password_hash=hash_password(password))
             s.add(u)
         await s.commit()
     print('Seeded tenant_demo + admin user')
@@ -120,7 +128,7 @@ async def seed():
 asyncio.run(seed())
 "
 
-# 5. Run the server
+# 6. Run the server
 uv run --python .venv/Scripts/python.exe uvicorn main:app --reload --port 8000
 ```
 
@@ -132,7 +140,7 @@ uv run --python .venv/Scripts/python.exe uvicorn main:app --reload --port 8000
 POST /api/auth/login
 Content-Type: application/json
 
-{"username": "admin", "password": "changeme"}
+{"username": "admin", "password": "<your-one-time-demo-password>"}
 
 → 200 {"access_token": "<jwt>", "token_type": "bearer"}
 ```
