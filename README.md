@@ -1,12 +1,12 @@
 # Mowazaf — Multi-tenant AI Agent Platform (V1 MVP)
 
-[![Build](https://github.com/MohamedHussien-zseeker/mowazaf/actions/workflows/ci.yml/badge.svg)](https://github.com/MohamedHussien-zseeker/mowazaf/actions/workflows/ci.yml)
-[![Tests](https://img.shields.io/badge/tests-7%20passing-brightgreen)](https://github.com/MohamedHussien-zseeker/mowazaf)
+[![Build](https://github.com/zseeker0/mowazaf/actions/workflows/ci.yml/badge.svg)](https://github.com/zseeker0/mowazaf/actions/workflows/ci.yml)
+[![Tests](https://img.shields.io/badge/tests-7%20passing-brightgreen)](https://github.com/zseeker0/mowazaf)
 [![License](https://img.shields.io/badge/license-Custom-blue)](./LICENSE)
 
 > **Status: V1 proof-of-concept.** Public mirror for portfolio/review.
 > Production canon (deployment secrets, infra config) lives in the
-> private sibling repo [`mowazaf-prod`](https://github.com/MohamedHussien-zseeker/mowazaf-prod).
+> private sibling repo [`mowazaf-prod`](https://github.com/zseeker0/mowazaf-prod).
 
 ## Overview
 
